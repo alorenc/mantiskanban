@@ -2,10 +2,13 @@ mantiskanban
 ============
 
 Mantis Kanban that uses ajax and mantisconnect
+
 Original Version: cgaspard/mantiskanban
+
 (This solution includes several fixes that may not be included in the version of the author)
 
 LIVE DEMO!!! http://mantiskanban.com/mantisbt/mantiskanban/
+
 (Demo does not include all the changes and applies to branch "dev")
 
 ![Alt text](https://raw.github.com/cgaspard/mantiskanban/master/images/mantis_logo.png "Logo")
@@ -102,4 +105,4 @@ Mantis Statuses as Buckets:
 ![Alt text](https://raw.github.com/cgaspard/mantiskanban/master/screenshots/screen4.png "Optional title")
 
 Full translation (eg Polish language):
-![Alt text](https://raw.github.com/cgaspard/mantiskanban/master/screenshots/screen5.png "Optional title")
+![Alt text](https://raw.github.com/alorenc/mantiskanban/dev/screenshots/screen5.png "Optional title")
