@@ -209,7 +209,7 @@ var Kanban = {
 			listDivTitle.setAttribute("listid", "listid" + kanbanListItem.ID);
 			listDivTitle.innerHTML = kanbanListItem.Name.capitalize();
 			listDiv.appendChild(listDivTitle);
-			
+
 			var listStoryContainer = document.createElement("div");
 			listStoryContainer.setAttribute("class", "kanbanliststorycontainer");
 			listStoryContainer.setAttribute("id", "kanbanliststorycontainer" + kanbanListItem.ID);
@@ -225,7 +225,7 @@ var Kanban = {
 			listLoadingDiv.setAttribute("class", "loader tempLoadingDiv");
 			listLoadingDiv.innerHTML = "<div class=\"dot dot1\"></div><div class=\"dot dot2\"></div><div class=\"dot dot3\"></div><div class=\"dot dot4\"></div>"
 			//listLoadingDiv.innerHTML = '<center><div class="tempLoadingDiv"><img src="images/columnLoadingGif.gif"></div></center>';
-			
+
 			//var listLoadingInnerDiv = document.createElement("div");
 			//listLoadingInnerDiv.innerHTML = "Loading...";
 			//listLoadingDiv.appendChild(listLoadingInnerDiv);
@@ -240,7 +240,7 @@ var Kanban = {
 			listDropArea.addEventListener('dragover', HandleDragOver, false);
 			listDropArea.addEventListener('dragenter', HandleDragEnter, false);
 			listDropArea.addEventListener("drop", Drop, false);
-			listDropArea.innerHTML = "Drop Here";
+			listDropArea.innerHTML = langObj.textDropHere;
 			listDiv.appendChild(listDropArea);
 
 			///Add it all to the container div
@@ -341,7 +341,7 @@ function Drop(event) {
 }
 
 function MoveKanbanStoryToProperList(kanbanStory) {
-	// //Kanban.UsingCustomField && foundStory.List.ID != foundStory.ListID) || (!Kanban.UsingCustomField && 
+	// //Kanban.UsingCustomField && foundStory.List.ID != foundStory.ListID) || (!Kanban.UsingCustomField &&
 	var thisList = null;
 	thisList = Kanban.GetListByID(kanbanStory.StorySource.status.id);
 	thisList.AddNewStoryUI(kanbanStory);
@@ -489,7 +489,7 @@ function HandleDragOver(e) {
 		previousDragOverItem = storyID;
 		ClearAllDragHoverAreas();
 		if(dropDiv != null) dropDiv.classList.add("over");
-	}	
+	}
 	return false;
 }
 
@@ -503,7 +503,7 @@ function HandleDragLeave(e) {
 	if(storyID != previousDragOverItem) return false;
 
 	if(!e.target.classList.contains("kanbanstorycontainer")) return false;
-	
+
 	var dropDiv = document.getElementById(e.target.getAttribute("dropdivid"));
 	if(dropDiv != null) dropDiv.classList.remove("over");
 }
@@ -777,11 +777,11 @@ function AddAttachmentToStoryEditForm(KanbanStory) {
 				foundAttachmentDiv.setAttribute("href", "data:application/octet-stream;base64,"+ resultText + "");
 
 
-			});			
+			});
 			attachmentDiv.appendChild(attachmentFileName);
 		}
 
-		
+
 	}
 }
 
@@ -818,7 +818,7 @@ function ChangeTaskStatus(storyID, taskID, isChecked) {
 		StartLoading();
 		var editStory = Kanban.GetStoryByFieldValue("ID", storyID);
 		var taskList = editStory.Tasks;
-		
+
 		if(isChecked) {
 			taskList[taskID].Status = "complete";
 		} else {
@@ -848,9 +848,9 @@ function ChangeTaskDescription(storyID, taskID, desc) {
 		StartLoading();
 		var editStory = Kanban.GetStoryByFieldValue("ID", storyID);
 		var taskList = editStory.Tasks;
-		
+
 		if(desc == taskList[taskID].Description) return;
-		
+
 		taskList[taskID].Description = desc;
 		editStory.Tasks = taskList;
 		Mantis.IssueUpdate(editStory.ID, editStory.StorySource);
@@ -1019,7 +1019,7 @@ function AddHistoryToStoryEditForm(KanbanStory) {
 			historysContainer.appendChild(historyDiv);
 		}
 	});
-	
+
 }
 
 function AddHistoryToStoryEditFormCallback(KanbanStory) {
@@ -1049,7 +1049,7 @@ function SearchForStory(localOnly) {
 			} else if(confirm("Issue is in a different project, would you like to switch?")) {
 				document.getElementById("seletedproject").value = returnObj.project.id;
 				SelectProject();
-			} 
+			}
 		});
 	} else if (foundIssue != null) {
 		EditStory(issueID);
@@ -1196,14 +1196,14 @@ function UpdateStoryHandlerComplete(result) {
 			var foundStory = Kanban.GetStoryByFieldValue("ID", Kanban.LastUpdateStoryID);
 			if(foundStory !== null) {
 				foundStory = Kanban.UpdateUnderlyingStorySource(foundStory);
-			
+
 				if(foundStory.ProjectID != Kanban.CurrentProject.ID) {
 					foundStory.Element.parentNode.removeChild(foundStory.Element);
 					return;
 				}
 
 				///If its null, then we werent' editing the story, just dropping between the lists
-				
+
 				//var newFoundStory = Kanban.GetStoryByFieldValue("ID", foundStory.ID);
 				foundStory.BuildKanbanStoryDiv();
 				foundStory.JoinList();
@@ -1234,7 +1234,7 @@ function EditStory(storyID) {
 	document.getElementById("editing-header").style.backgroundImage = "url(" + get_gravatar_image_url (thisStory.AssignedToUser.Email, 80) + ")";
 
 	/// Thanks to todace for sample code https://github.com/todace
-	document.getElementById("edit-story-title").innerHTML = "<a target=\"_new\" class=\"btn btn-primary\" href=http://" + Mantis.ServerHostname + "/view.php?id=" + thisStory.ID + ">"+ thisStory.ID + "</a> &nbsp; " + (thisStory.Summary.length > 40 ? thisStory.Summary.substring(0, 37) + "..." : thisStory.Summary);
+	document.getElementById("edit-story-title").innerHTML = "<a target=\"_new\" href=http://" + Mantis.ServerHostname + "/view.php?id=" + thisStory.ID + ">"+ thisStory.ID + "</a> &nbsp; " + (thisStory.Summary.length > 40 ? thisStory.Summary.substring(0, 37) + "..." : thisStory.Summary);
 	$("#edit-story-id").val(thisStory.ID);
 	$("#edit-summary").val(thisStory.Summary);
 	$("#edit-description").val(thisStory.Description);
@@ -1278,7 +1278,7 @@ function EditStory(storyID) {
 	}
 
 	///Add a blank option
-	selectAssignedUser.options[selectAssignedUser.options.length] = new Option("--- Assign To No One ---", "");
+	selectAssignedUser.options[selectAssignedUser.options.length] = new Option(langObj.textAssignToNoOne, "");
 	for(var i = 0; i < Kanban.CurrentProject.Users.length; i++) {
 		var user = Kanban.CurrentProject.Users[i];
 		selectAssignedUser.options[selectAssignedUser.options.length] = new Option(user.Name, user.ID);
@@ -1289,33 +1289,37 @@ function EditStory(storyID) {
 
 	for(var i = 0; i < Mantis.Statuses.length; i++) {
 		var status = Mantis.Statuses[i];
-		selectAddStatus.options[selectAddStatus.options.length] = new Option(status.name.capitalize(), status.id);
+		var statusName = (langObj.Status[status.id] === undefined) ? status.name.capitalize() : langObj.Status[status.id];
+		selectAddStatus.options[selectAddStatus.options.length] = new Option(statusName, status.id);
 		if(thisStory.StatusID == status.id) {
 			selectAddStatus.selectedIndex = i;
 		}
 	}
-	
+
 	for(var i = 0; i < Mantis.Priorities.length; i++) {
 		var priority = Mantis.Priorities[i];
-		selectAddPriority.options[selectAddPriority.options.length] = new Option(priority.name.capitalize(), priority.id);
+		var priorityName = (langObj.Priority[priority.id] === undefined) ? priority.name.capitalize() : langObj.Priority[priority.id];
+		selectAddPriority.options[selectAddPriority.options.length] = new Option(priorityName, priority.id);
 		if(thisStory.PriorityID == priority.id) {
 			selectAddPriority.selectedIndex = i;
 		}
 	}
 
-	selectEditSeverity.options[selectEditSeverity.options.length] = new Option("--- Set To Default ---", "");
+	selectEditSeverity.options[selectEditSeverity.options.length] = new Option(langObj.textSetDefault, "");
 	for(var i = 0; i < Mantis.Severities.length; i++) {
 		var severity = Mantis.Severities[i];
-		selectEditSeverity.options[selectEditSeverity.options.length] = new Option(severity.name.capitalize(), severity.id);
+		var severityName = (langObj.Severity[severity.id] === undefined) ? severity.name.capitalize() : langObj.Severity[severity.id];
+		selectEditSeverity.options[selectEditSeverity.options.length] = new Option(severityName, severity.id);
 		if(thisStory.SeverityID == severity.id) {
 			selectEditSeverity.selectedIndex = i + 1;
 		}
 	}
 
-	selectEditResolution.options[selectEditResolution.options.length] = new Option("--- Set To Default ---", "");
+	selectEditResolution.options[selectEditResolution.options.length] = new Option(langObj.textSetDefault, "");
 	for(var i = 0; i < Mantis.Resolutions.length; i++) {
 		var resolution = Mantis.Resolutions[i];
-		selectEditResolution.options[selectEditResolution.options.length] = new Option(resolution.name.capitalize(), resolution.id);
+		var resolutionName = (langObj.Resolution[resolution.id] === undefined) ? resolution.name.capitalize() : langObj.Resolution[resolution.id];
+		selectEditResolution.options[selectEditResolution.options.length] = new Option(resolutionName, resolution.id);
 		if(thisStory.ResolutionID == resolution.id) {
 			selectEditResolution.selectedIndex = i + 1;
 		}
@@ -1346,11 +1350,11 @@ function EditStory(storyID) {
 }
 
 function ShowPriorityLegend() {
-	document.getElementById("contentarea").setAttribute("showingpriority", "true");	
+	document.getElementById("contentarea").setAttribute("showingpriority", "true");
 }
 
 function HidePriorityLegend() {
-	document.getElementById("contentarea").setAttribute("showingpriority", "false");	
+	document.getElementById("contentarea").setAttribute("showingpriority", "false");
 }
 
 Kanban.ApplyTheme = function(styleID) {
@@ -1393,7 +1397,7 @@ Kanban.ApplySettings = function() {
 }
 
 Kanban.LoadRuntimeSettings = function() {
-	document.getElementById("settings-list-width").value = getStyleRule(".kanbanlist", "width");	
+	document.getElementById("settings-list-width").value = getStyleRule(".kanbanlist", "width");
 	document.getElementById("settings-connectURL").value = DefaultSettings.connectURL;
 	document.getElementById("mantisURL").value = DefaultSettings.connectURL;
 	document.getElementById("settings-autofit-onresize").checked = DefaultSettings.autoResizeColumns;
@@ -1419,7 +1423,7 @@ function ShowSettings() {
 
 	for(var q = 0; q < Kanban.Themes.length; q++) {
 		var thisTheme = Kanban.Themes[q];
-		
+
 		settingsThemesChooser.options[q] = new Option(thisTheme.name, q);
 	}
 
@@ -1429,7 +1433,7 @@ function ShowSettings() {
 function CloseSettings() {
 	document.getElementById("kanbancontent").setAttribute("editing", "false");
 	document.getElementById("edit-settings-form").style.visibility = "hidden";
-	document.getElementById("edit-settings-form").setAttribute("editing", "false");		
+	document.getElementById("edit-settings-form").setAttribute("editing", "false");
 }
 
 function ShowEditStory() {
@@ -1437,27 +1441,27 @@ function ShowEditStory() {
 	CloseSettings();
 	document.getElementById("kanbancontent").setAttribute("editing", "true");
 	document.getElementById("edit-story-form").style.visibility = "visible";
-	document.getElementById("edit-story-form").setAttribute("editing", "true");	
+	document.getElementById("edit-story-form").setAttribute("editing", "true");
 }
 
 function ShowAddStory() {
 	CloseEditStory();
 	CloseSettings();
 	document.getElementById("add-story-form").style.visibility = "visible";
-	document.getElementById("add-story-form").setAttribute("editing", "true");		
+	document.getElementById("add-story-form").setAttribute("editing", "true");
 	document.getElementById("kanbancontent").setAttribute("editing", "true");
 }
 
 function CloseEditStory() {
 	document.getElementById('kanbancontent').setAttribute('editing', 'false');
-	document.getElementById("edit-story-form").setAttribute("editing", "false");	
+	document.getElementById("edit-story-form").setAttribute("editing", "false");
 	document.getElementById("edit-story-form").style.visibility = "hidden";
 }
 
 function CloseAddStory() {
 	document.getElementById('kanbancontent').setAttribute('editing', 'false');
 	document.getElementById("add-story-form").style.visibility = "hidden";
-	document.getElementById("add-story-form").setAttribute("editing", "false");	
-	
+	document.getElementById("add-story-form").setAttribute("editing", "false");
+
 
 }

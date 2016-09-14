@@ -11,16 +11,16 @@
 ##Step 1: Add localiztion files
 Path is i18n/lang/{lang}.js .
 File name is {lang}.js. Ex: zh-TW.js for traditional Chinese
-Context: 
+Context:
 var langObj = {
 		//"stringId": "stringContext",
-		"delete": "刪除", 
+		"delete": "刪除",
 		"add": "新增"
 	};
 
 ##Step 2: Load script in html
 <script language="javascript" type="text/javascript" src="i18n/i18n.js"></script>
-	
+
 ##Step 3: Lookup "stringContext" by "stringId" in html
 <div>delete</div>
 sould be changed to
@@ -29,14 +29,17 @@ sould be changed to
 
 $(function(){
 	//load language file
-	var userLang = (navigator.language || navigator.userLanguage).toLowerCase(); 
- 	// alert ("The language is: " + userLang);
+	var userLang = (navigator.language || navigator.userLanguage).toLowerCase();
+	// alert ("The language is: " + userLang);
 
- 	if( userLang=="zh-tw" ){
+	if( userLang=="zh-tw" ){
  		loadScript("i18n/lang/zh-tw.js", onLangLoaded);
- 	} 
+ 	}
 	else if( userLang=="en-us" ){
 		loadScript("i18n/lang/en-us.js", onLangLoaded);
+ 	}
+	else if( userLang=="pl" || userLang=="pl_pl" ){
+ 		loadScript("i18n/lang/pl-pl.js", onLangLoaded);
  	}
 	else {
 		//default to en-us
@@ -56,6 +59,13 @@ function loadScript(src, callback){
 
 function onLangLoaded(){
 	$(".i18ntext").each( function(){
-		$(this).text( langObj[$(this).attr("data-text-id")] );
+		var str = $(this).attr("data-text-id");
+		var split = str.split("_");
+
+		if ( split.length > 1 ) {
+			$(this).text( langObj[split[0]][split[1]] );
+		} else {
+			$(this).text( langObj[str] );
+		}
 	});
 }

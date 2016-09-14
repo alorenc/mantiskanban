@@ -13,17 +13,17 @@
 		<link crossorigin href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 		-->
 		<script src="//code.jquery.com/jquery.js"></script>
-		<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>		
-	
+		<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+
 		<script src="js/modernizr-latest.js" type="text/javascript"></script>
-		
+
 		<link crossorigin rel="stylesheet" href="kanban.css" />
 		<link crossorigin rel="stylesheet" href="forms.css" />
 
 	   <link id="themeLink" href="themes/default.css" rel="stylesheet" type="text/css" />
 
 		<link crossorigin rel="stylesheet" href="custom.css" />
-		
+
 		<script language="javascript" type="text/javascript" src="js/global.js"></script>
 		<script language="javascript" type="text/javascript" src="js/soapclient.js"></script>
 		<script language="javascript" type="text/javascript" src="js/mantis.js"></script>
@@ -32,7 +32,7 @@
 		<script language="javascript" type="text/javascript" src="config.js"></script>
 		<script language="javascript" type="text/javascript" src="index.js"></script>
 		<script language="javascript" type="text/javascript" src="i18n/i18n.js"></script>
-		
+
 		<title>Mantis Kanban</title>
 
 	</head>
@@ -46,7 +46,7 @@
 					<div class="dot dot4"></div>
 				</div>
 				<img id="loadedimage" src="images/loaded.png"  style="display:none;"/>
-			</div>                        
+			</div>
 			<div class="headerarea" style="width:100%;">
 				<div>
 					<div id="loginarea" class="loginarea" style="width:100%; padding-top:200px; text-align:center;">
@@ -60,9 +60,9 @@
 								<input type="password" id="password" placeholder="Password" value="" style="width: 160px;" />
 								<br><br>
 								<input type="text" id="mantisURL" placeholder="Mantis URL" style="width: 325px;" value="" onclick=""><br>
-								<input type="submit" style="position: absolute; left: -9999px"/> 
+								<input type="submit" style="position: absolute; left: -9999px"/>
 								<br>
-								<div id="loginButton" class="btn btn-primary btn-small" onclick="Login();">Login</div>
+								<div id="loginButton" class="btn btn-primary btn-small" onclick="Login();"><span class="i18ntext" data-text-id="textLogin"></span></div>
 							</form>
 						</div>
 					</form>
@@ -77,7 +77,7 @@
 									<button class="btn btn-primary btn-small dropdown-toggle" type="button" data-toggle="dropdown">
 										<i class="glyphicon glyphicon-dashboard"></i>
 										<span class="i18ntext" data-text-id="textSelectProject"></span><span class="caret"></span>
-									</button>						
+									</button>
 									<ul id="projectlist" class="dropdown-menu">
 									<!-- dropdown menu links -->
 									</ul>
@@ -98,10 +98,10 @@
 								<div id="gravatarcurrentuser" class="btn gravatarcurrentuser" style=""></div>
 								<div class="btn btn-default btn-small" onclick="Logout();"><i class="glyphicon glyphicon-log-out"></i> <span class="i18ntext" data-text-id="textLogout"></span></div>
 								<div class="" style="display:inline-block; padding-left: 20px;">
-									<div class="btn btn-primary btn-small" onclick="SearchForStory()"><i class="glyphicon glyphicon-search"></i> Go</div>
+									<div class="btn btn-primary btn-small" onclick="SearchForStory()"><i class="glyphicon glyphicon-search"></i><span class="i18ntext" data-text-id="textGo"></span></div>
 									<input type="text" id="searchfield" placeholder="Issue #" class="form-control input-small search-query" style="width:70px;" onkeyup="if(this.value.length > 0 && event.keyCode == 13) { SearchForStory(); }"/>
 								</div>
-								
+
 							</div>
 						</div>
 					</div>
@@ -118,15 +118,15 @@
 							<div onclick="DeleteIssue();CloseEditStory();" class="btn btn-danger pull-left"><div class="i18ntext" data-text-id="textDelete"></div></div>
 							<div onclick="CloseEditStory();" class="btn btn-warning"><div class="i18ntext" data-text-id="textHide"></div></div>
 							<div onclick="UpdateStoryFromFormData(); CloseEditStory();" class="btn btn-primary"><div class="i18ntext" data-text-id="textSaveChanges"></div></div>
-						</div>			
+						</div>
 						<div class="editing-content">
 								<ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
 									<li class="active" ><a href="#tabs-1" data-toggle="tab"><div class="i18ntext" data-text-id="textGeneral"></div></a></li>
 									<li><a href="#tabs-2" data-toggle="tab"><div class="i18ntext" data-text-id="textDescription"></div></a></li>
 									<li><a href="#tabs-3" data-toggle="tab"><div class="i18ntext" data-text-id="textNotes"></div></a></li>
 									<li><a href="#tabs-4" data-toggle="tab"><div class="i18ntext" data-text-id="textAttachments"></div></a></li>
-									<li><a href="#tabs-5" data-toggle="tab"><div class="i18ntext" data-text-id="textHistory"></div></a></li>
-									<li><a href="#tabs-6" data-toggle="tab">History</a></li>
+									<li><a href="#tabs-5" data-toggle="tab"><div class="i18ntext" data-text-id="textTodo"></div></a></li>
+									<li><a href="#tabs-6" data-toggle="tab"><div class="i18ntext" data-text-id="textHistory"></div></a></li>
 								</ul>
 								<div class="tab-content">
 									<div class="tab-pane active" id="tabs-1">
@@ -143,7 +143,7 @@
 												<div class="tagsborderarea">
 													<div class="tagscontainer" id="edit-story-tags-container">
 													</div>
-													
+
 														<div class="input-group">
 															<div class="input-group-btn">
 																<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="i18ntext" data-text-id="textExistTags"></span><span class="caret"></span></button>
@@ -157,7 +157,7 @@
 														  		<div class="btn btn-danger" onclick="AddNewTagFromEditForm();"><span class="glyphicon glyphicon-plus"><span class="i18ntext" data-text-id="textAddTag"></span></span></div>
 															</div>
 														</div>
-													</div>										
+													</div>
 												</div>
 											<div class="control-group col-xs-6">
 												<label class="control-label" for="edit-project"><div class="i18ntext" data-text-id="textProject"></div></label>
@@ -172,19 +172,19 @@
 												</div>
 											</div>
 											<div class="control-group col-xs-6">
-												<label class="control-label" for="edit-priority"><div class="i18ntext" data-text-id="textPriority"></div></label>
+												<label class="control-label" for="edit-priority"><div class="i18ntext" data-text-id="textSeverity"></div></label>
 												<div class="controls">
 													<select name="edit-severity" id="edit-severity" class="form-control input-small"></select>
 												</div>
 											</div>
 											<div class="control-group col-xs-6">
-												<label class="control-label" for="edit-resolution">Resolution</label>
+												<label class="control-label" for="edit-resolution"><div class="i18ntext" data-text-id="textResolution"></div></label>
 												<div class="controls">
 													<select name="edit-resolution" id="edit-resolution" class="form-control input-small"></select>
 												</div>
-											</div>	
+											</div>
 											<div class="control-group col-xs-6">
-												<label class="control-label" for="edit-priority">Priority:</label>
+												<label class="control-label" for="edit-priority"><div class="i18ntext" data-text-id="textPriority"></div></label>
 												<div class="controls">
 													<select name="edit-priority" id="edit-priority" class="form-control input-small"></select>
 												</div>
@@ -194,7 +194,7 @@
 												<div class="controls">
 													<select name="edit-category" id="edit-category" class="form-control input-small"></select>
 												</div>
-											</div>											
+											</div>
 											<div class="control-group col-xs-6">
 												<label class="control-label" for="edit-reporter"><div class="i18ntext" data-text-id="textReporter"></div></label>
 												<div class="controls">
@@ -252,9 +252,10 @@
 									</div>
 									<div class="tab-pane" id="tabs-5">
 										<div class="fill">
-										<div class="i18ntext" data-text-id="textHistory"></div>	
+											<textarea class="edit-newtasktext input-large form-control" id="edit-newtasktext" name="edit-newtasktext" title="Enter New Tasks Here"></textarea><br>
 											<div class="btn btn-success addTaskButton" id="edit-story-new-task-save-button" name="">
-												<span class="glyphicon glyphicon-arrow-down"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Task&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<span class="glyphicon glyphicon-arrow-down"></span>
+												<span class="i18ntext" data-text-id="textAddTask"></span>
 												<span class="glyphicon glyphicon-arrow-down"></span>
 											</div>
 											<div id="edit-story-tasks-container" name="edit-story-tasks-container" class="tasksarea"></div>
@@ -264,7 +265,7 @@
 										<div class="fill">
 											<div class="historyarea" id="edit-story-historys-container"></div>
 										</div>
-									</div>									
+									</div>
 								</div>
 						</div>
 					</div>
@@ -285,7 +286,7 @@
 									</div>
 								</div>
 								<div class="contol-group" id="add-custom-field-container" name="add-custom-field-container">
-									<label class="control-label" for="add-custom-field">Bucket:</label>
+									<label class="control-label" for="add-custom-field"><div class="i18ntext" data-text-id="textBucket"></div></label>
 									<div class="controls">
 										<select class="form-control" name="add-custom-field" id="add-custom-field" ></select>
 									</div>
@@ -331,36 +332,36 @@
 					</div>
 					<div id="edit-settings-form" class="editform">
 						<div class="editing-header">
-							<h4>Settings</h4>
+							<h4><div class="i18ntext" data-text-id="textSettings"></div></h4>
 						</div>
 						<div class="btn-group editing-buttons">
-							<div onclick="CloseSettings();" class="btn btn-warning">Close</div>							
-							<div onclick="Kanban.SaveSettings(); CloseSettings();" class="btn btn-primary">Save Settings</div>
+							<div onclick="CloseSettings();" class="btn btn-warning"><span class="i18ntext" data-text-id="textClose"></span></div>
+							<div onclick="Kanban.SaveSettings(); CloseSettings();" class="btn btn-primary"><span class="i18ntext" data-text-id="textSaveSettings"></span></div>
 						</div>
 						<div class="editing-content">
 							<form class="form-horizontal" onsubmit="Kanban.SaveSettings(); CloseSettings();">
 								<div class="control-group">
 									<table class="table">
 										<tr>
-											<td colspan="2"><label class="control-label" for="settings-list-width">List Width</label></td>
+											<td colspan="2"><label class="control-label" for="settings-list-width"><div class="i18ntext" data-text-id="textListWidth"></div></label></td>
 										</tr>
 										<tr>
-											<td>												
+											<td>
 												<div class="controls">
 													<input type="text" class="form-control" name="settings-list-width" id="settings-list-width" placeholder="List Width" />
 												</div>
 											</td>
 											<td>
-												<span onclick="FitColsToScreen(); Kanban.SaveSettings(); CloseSettings();" class="btn btn-success">Auto-Fit&nbsp;<span class="glyphicon glyphicon-resize-horizontal"></span></span>
+												<span onclick="FitColsToScreen(); Kanban.SaveSettings(); CloseSettings();" class="btn btn-success"><div class="i18ntext" data-text-id="textAutoFit"></div>&nbsp;<span class="glyphicon glyphicon-resize-horizontal"></span></span>
 											</td>
 										</tr>
 										<tr>
 											<td colspan="2">
-												<label class="control-label" for="settings-list-width">Auto-Fit When Browser Resizes</label>
+												<label class="control-label" for="settings-list-width"><div class="i18ntext" data-text-id="textAutoFitBrowse"></div></label>
 											</td>
 										</tr>
 										<tr>
-											<td>												
+											<td>
 												<div class="controls">
 													<input type="checkbox" class="form-control" name="settings-autofit-onresize" id="settings-autofit-onresize" />
 												</div>
@@ -368,11 +369,11 @@
 										</tr>
 										<tr>
 											<td colspan="2">
-												<label class="control-label" for="settings-list-width">Mantis Connect URL</label>
+												<label class="control-label" for="settings-list-width"><div class="i18ntext" data-text-id="textMantisURL"></div></label>
 											</td>
 										</tr>
 										<tr>
-											<td colspan="2">												
+											<td colspan="2">
 												<div class="controls">
 													<input type="text" name="settings-connectURL" id="settings-connectURL" class="form-control" placeholder="Mantis Connect URL" />
 												</div>
@@ -380,29 +381,29 @@
 										</tr>
 										<tr>
 											<td colspan="2">
-												<label class="control-label" for="settings-selectedTheme">Theme:</label>
+												<label class="control-label" for="settings-selectedTheme"><div class="i18ntext" data-text-id="textTheme"></div></label>
 											</td>
-										</tr>										
+										</tr>
 										<tr>
 											<td colspan="2">
 												<select id="settings-selectedTheme" name="settings-selectedTheme"class=" form-control input-small">
 												</select>
 											</td>
 										</tr>
-									</table>								
+									</table>
 								</div>
 							</form>
 						</div>
-					</div>	
+					</div>
 				</div>
 				<div id="prioritylegend">
-					<div priority="immediate"><div class="i18ntext" data-text-id="textImmediate"></div></div>
-					<div priority="urgent"><div class="i18ntext" data-text-id="textUrgent"></div></div>
-					<div priority="high"><div class="i18ntext" data-text-id="textHigh"></div></div>
-					<div priority="normal"><div class="i18ntext" data-text-id="textNormal"></div></div>
-					<div priority="low"><div class="i18ntext" data-text-id="textLow"></div></div>
-					<div priority="none"><div class="i18ntext" data-text-id="textNo"></div></div>
-				</div>				
+					<div priority="immediate"><div class="i18ntext" data-text-id="Priority_60"></div></div>
+					<div priority="urgent"><div class="i18ntext" data-text-id="Priority_50"></div></div>
+					<div priority="high"><div class="i18ntext" data-text-id="Priority_40"></div></div>
+					<div priority="normal"><div class="i18ntext" data-text-id="Priority_30"></div></div>
+					<div priority="low"><div class="i18ntext" data-text-id="Priority_20"></div></div>
+					<div priority="none"><div class="i18ntext" data-text-id="Priority_10"></div></div>
+				</div>
 			</div>
 
 		</div>
@@ -412,7 +413,7 @@
 		</div>
 		<input type="hidden" style="display:none;" id="seletedproject" name="selectedproject" />
 		<div id="attachmentdisplay" class="" style="" onclick="CloseLightBox();">
-				<a href="#" class="btn btn-primary pull-right" style="margin-right: 20px; margin-top: 20px;" onclick="CloseLightBox();"><i class="glyphicons glyphicons-white glyphicons-close"></i>Close</a>
+				<a href="#" class="btn btn-primary pull-right" style="margin-right: 20px; margin-top: 20px;" onclick="CloseLightBox();"><i class="glyphicons glyphicons-white glyphicons-close"></i><div class="i18ntext" data-text-id="textClose"></div></a>
 				<br>
 				<center>
 					<div class="" style="padding-left: 40px; height: 100%; verticle-align: middle;">
