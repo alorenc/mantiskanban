@@ -343,29 +343,45 @@ function Drop(event) {
 function MoveKanbanStoryToProperList(kanbanStory) {
 	// //Kanban.UsingCustomField && foundStory.List.ID != foundStory.ListID) || (!Kanban.UsingCustomField &&
 	var thisList = null;
-	thisList = Kanban.GetListByID(kanbanStory.StorySource.status.id);
-	thisList.AddNewStoryUI(kanbanStory);
+	try {
+		thisList = Kanban.GetListByID(kanbanStory.StorySource.status.id);
+		thisList.AddNewStoryUI(kanbanStory);
+	} catch(e) {
+		if (e.message === 'thisList is null') {
+			alert('Error Update: You can not move the issue. Subprojects must have the same ScumBucket');
+		} else {
+			alert('Error: Update: ' + e.message);
+		}
+
+		try {
+			Kanban.UndoLastKanbanMove();
+		} catch(e) {
+			console.log(e);
+		}
+	}
 }
 
 function UpdateKanbanStoryComplete(result) {
 	console.log("UpdateKanbanStoryComplete " + result);
 	Kanban.BlockUpdates = false;
 	StopLoading();
+
 	if(result != "true") {
 		try {
 			Kanban.UndoLastKanbanMove();
 		} catch(e) {
 			console.log(e);
 		}
+
+		//SelectProject();
 		alert("Error Updating: " + result);
 	} else {
 		try {
 			var foundStory = Kanban.GetStoryByFieldValue("ID", document.getElementById("edit-story-id").value);
+
 			if(foundStory !== null) {
 
 				///If its null, then we werent' editing the story, just dropping between the lists
-
-
 				var foundStory = Kanban.UpdateUnderlyingStorySource(foundStory);
 
 				///Move it to the new location first before we rebuild the gui
@@ -378,6 +394,15 @@ function UpdateKanbanStoryComplete(result) {
 
 
 				/// Make sure the list is still valid
+			} else {
+				try {
+					Kanban.UndoLastKanbanMove();
+				} catch(e) {
+					console.log(e);
+				}
+
+				//SelectProject();
+				alert('Error Update: You can not move the issue. Subprojects must have the same ScumBucket');
 			}
 		} catch(e) {
 			console.log(e);
@@ -444,6 +469,7 @@ function UpdateStoryStatusWhenCustomFieldUpdated(UpatedStory, CustomFieldName, C
 
 function UpdateListForCanbanStory(KanbanStoryToUpdate, KanbanListToMoveTo, UpdateKanbanStoryCallback) {
 	var updateIssue = null;
+
 	if(KanbanStoryToUpdate.UsesCustomField) {
 		UpdateStoryStatusWhenCustomFieldUpdated(KanbanStoryToUpdate, Kanban._listIDField, KanbanListToMoveTo.ID);
 		updateIssue = Mantis.UpdateStructureMethods.Issue.UpdateCustomField(KanbanStoryToUpdate.StorySource, Kanban._listIDField, KanbanListToMoveTo.ID);
@@ -499,13 +525,17 @@ function HandleDragEnter(e) {
 }
 
 function HandleDragLeave(e) {
-	var storyID = e.target.getAttribute("storyid");
-	if(storyID != previousDragOverItem) return false;
+	if(e.target.hasAttribute("storyid")){
+		var storyID = e.target.getAttribute("storyid");
+		if(storyID != previousDragOverItem) return false;
+	}
 
 	if(!e.target.classList.contains("kanbanstorycontainer")) return false;
 
-	var dropDiv = document.getElementById(e.target.getAttribute("dropdivid"));
-	if(dropDiv != null) dropDiv.classList.remove("over");
+	if(e.target.hasAttribute("dropdivid")){
+		var dropDiv = document.getElementById(e.target.getAttribute("dropdivid"));
+		if(dropDiv != null) dropDiv.classList.remove("over");
+	}
 }
 
 
@@ -1186,7 +1216,7 @@ function UpdateStoryHandler(storyID, handlerID) {
 }
 
 function UpdateStoryHandlerComplete(result) {
-	console.log("UpdateKanbanStoryComplete " + result);
+	console.log("UpdateStoryHandlerComplete " + result);
 	Kanban.BlockUpdates = false;
 	StopLoading();
 	if(result != "true") {
@@ -1462,6 +1492,4 @@ function CloseAddStory() {
 	document.getElementById('kanbancontent').setAttribute('editing', 'false');
 	document.getElementById("add-story-form").style.visibility = "hidden";
 	document.getElementById("add-story-form").setAttribute("editing", "false");
-
-
 }

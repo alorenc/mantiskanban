@@ -202,8 +202,7 @@ SOAPClient._sendSoapRequest = function(url, method, parameters, async, callback,
 SOAPClient._onSendSoapRequest = function(method, async, callback, wsdl, req) 
 {
 	var o = null;
-	var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Response");
-	//var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Result");
+	var nd = SOAPClient._getElementsByTagName(req.responseXML, method + "Result");
 	if(nd.length == 0)
 		nd = SOAPClient._getElementsByTagName(req.responseXML, "return");	// PHP web Service?
 	if(nd.length == 0)
@@ -219,14 +218,9 @@ SOAPClient._onSendSoapRequest = function(method, async, callback, wsdl, req)
 	else
 		o = SOAPClient._soapresult2object(nd[0], wsdl);
 	if(callback)
-		callback((o.return?o.return:o), req.responseXML);
+		callback(o, req.responseXML);
 	if(!async)
-		return (o.return?o.return:o);
-
-	//if(callback)
-	//	callback(o, req.responseXML);
-	//if(!async)
-	//	return o;
+		return o;
 }
 SOAPClient._soapresult2object = function(node, wsdl)
 {
