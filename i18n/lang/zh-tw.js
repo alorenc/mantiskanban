@@ -40,6 +40,11 @@ var langStatus = {
 	90:"closed"
 };
 
+var langSticky = {
+	0:"no",
+	1:"yes"
+};
+
 var langObj = {
 "Severity": langSeverity,
 "Resolution": langResolution,
@@ -58,7 +63,7 @@ var langObj = {
 "textDeleteAttachemets":"刪除全部附件",
 "textDescription":"說明",
 "textExistTags":"已建立的標籤",
-"textFilter":"篩選",
+"textSelectFilter":"篩選",
 "textGeneral":"概要",
 "textHandler":"負責人",
 "textHide":"離開",
@@ -66,6 +71,7 @@ var langObj = {
 "textLogout":"登出",
 "textNew":"新增",
 "textNotes":"討論",
+"textNote":"討論",
 "textSeverity":"Severity",
 "textPiorities":"優先度",
 "textPriority":"優先度",
@@ -100,6 +106,14 @@ var langObj = {
 "textTodo":"TODO List",
 "textSetDefault": "--- Set To Default ---",
 "textAssignToNoOne": "--- Assign To No One ---",
-"textGo": "Go"
+"textGo": "Go",
+"textOneMinute": " minute",
+"textManyMinutes": " minutes",
+"textSticky": "Sticky",
+"textProjectID": "Project ID",
+"textOptions": "Legends",
+"textOptionsPiorities": "Priorities (ribbon):",
+"textOptionsSeverity": "Severity (bar):",
+"textOptionsDefault": "default"
 
 };

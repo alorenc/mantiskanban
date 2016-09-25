@@ -105,9 +105,8 @@
 }
 
 .editform {
-	overflow: auto;
 	height: 100%;
-	width: 575px;
+	width: 599px;
 	background-color: #FFFFFF;
 	border-left: solid 1px #999;
 	border-top: 1px solid #999;
@@ -170,7 +169,8 @@
 
 
 .editing-content {
-	height: calc(100% - 145px) !important;
+    overflow: auto;
+	height: calc(100% - 110px) !important;
 }
 
 .tab-content {
@@ -198,5 +198,7 @@
 }
 
 .i18ntext {
-	margin: 0 5px;
+	margin: 0 4px;
 }
+
+

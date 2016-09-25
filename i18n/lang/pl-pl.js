@@ -40,11 +40,17 @@ var langStatus = {
 	90:"zamknięty"
 };
 
+var langSticky = {
+	0:"nie",
+	1:"tak"
+};
+
 var langObj = {
 "Severity": langSeverity,
 "Resolution": langResolution,
 "Priority": langPriority,
 "Status": langStatus,
+"Sticky": langSticky,
 "textAddNewStory":"Wprowadź szczegóły zgłoszenia",
 "textAddNote":"Dodaj notatkę",
 "textAddTag":"Dodaj",
@@ -58,14 +64,15 @@ var langObj = {
 "textDeleteAttachemets":"Usuń załączniki",
 "textDescription":"Opis",
 "textExistTags":"Istniejące",
-"textFilter":"Filtruj",
+"textSelectFilter":"Filtruj",
 "textGeneral":"Ogólny",
 "textHandler":"Przypisz do",
 "textHide":"Ukryj",
 "textHistory":"Historia",
 "textLogout":"Wyloguj",
 "textNew":"Dodaj zgłoszenie",
-"textNotes":"Notatki",
+"textNotes":"Komentarze",
+"textNote":"Komentarz",
 "textSeverity":"Ważność",
 "textPriority":"Priorytet",
 "textPiorities":"Priorytety",
@@ -78,7 +85,7 @@ var langObj = {
 "textSetting":"Ustawienia",
 "textStatus":"Status",
 "textSteps":"Kroki, by powtórzyć",
-"textSummary":"Podsumowanie",
+"textSummary":"Temat",
 "textTag1":"Tag 1",
 "textTag2":"Tag 2",
 "textTags":"Tagi (kliknij, aby usunąć):",
@@ -99,48 +106,14 @@ var langObj = {
 "textTodo": "Zadania",
 "textSetDefault": "--- domyślnie ---",
 "textAssignToNoOne": "--- nieprzypisane ---",
-"textGo": "Idź do"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+"textGo": "Idź do",
+"textOneMinute": " minuta",
+"textManyMinutes": " minut",
+"textSticky": "Przyklej",
+"textProjectID": "Projekt ID",
+"textOptions": "Ważność / Priorytet",
+"textOptionsPiorities": "Priorytet:",
+"textOptionsSeverity": "Ważnoś (pasek):",
+"textOptionsDefault": "- domyślny"
 
 };
